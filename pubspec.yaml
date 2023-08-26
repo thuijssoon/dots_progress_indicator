@@ -1,0 +1,19 @@
+name: dots_progress_indicator
+description: A configurable indeterminate progress indicator showing bouncing dots.
+version: 0.1.0
+homepage: https://github.com/thuijssoon/dots_progress_indicator
+
+environment:
+  sdk: '>=3.0.6 <4.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  very_good_analysis: ^5.0.0+1
+
+flutter:
