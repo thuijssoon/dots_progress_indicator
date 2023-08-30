@@ -78,12 +78,7 @@ class _DotsProgressIndicatorState extends State<DotsProgressIndicator>
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ??
-        AnimationController(
-          duration: widget.duration,
-          vsync: this,
-        )
-      ..repeat();
+    _initController();
   }
 
   @override
@@ -117,5 +112,23 @@ class _DotsProgressIndicatorState extends State<DotsProgressIndicator>
         ),
       ),
     );
+  }
+
+  @override
+  void didUpdateWidget(DotsProgressIndicator oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.controller != widget.controller ||
+        widget.controller == null && oldWidget.duration != widget.duration) {
+      _initController();
+    }
+  }
+
+  void _initController() {
+    _controller = widget.controller ??
+        AnimationController(
+          duration: widget.duration,
+          vsync: this,
+        )
+      ..repeat();
   }
 }
