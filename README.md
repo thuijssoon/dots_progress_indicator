@@ -21,3 +21,16 @@ dependencies:
 Don't forget to `flutter pub get`.
 
 ### 2. Use `DotsProgressIndicator` in your app
+
+```dart
+DotsProgressIndicator(
+  backgroundColor: Colors.black12,
+  color: Colors.blue,
+  curve: Curves.bounceIn,
+  dotDiameter: 20,
+  duration: Duration(milliseconds: 1000),
+  numberOfDots: 5,
+  spaceBetween: 4,
+),
+
+```
