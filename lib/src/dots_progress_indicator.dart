@@ -78,12 +78,7 @@ class _DotsProgressIndicatorState extends State<DotsProgressIndicator>
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ??
-        AnimationController(
-          duration: widget.duration,
-          vsync: this,
-        )
-      ..repeat();
+    _initController();
   }
 
   @override
@@ -103,19 +98,39 @@ class _DotsProgressIndicatorState extends State<DotsProgressIndicator>
           minWidth: (widget.dotDiameter * widget.numberOfDots) +
               (widget.spaceBetween * (widget.numberOfDots - 1)),
         ),
-        child: CustomPaint(
-          painter: DotsProgressIndicatorPainter(
-            animation: _controller.view,
-            backgroundColor: widget.backgroundColor,
-            color: widget._getColor(context),
-            curve: widget.curve,
-            dotDiameter: widget.dotDiameter,
-            numberOfDots: widget.numberOfDots,
-            spaceBetween: widget.spaceBetween,
-            textDirection: textDirection,
+        child: RepaintBoundary(
+          child: CustomPaint(
+            painter: DotsProgressIndicatorPainter(
+              animation: _controller.view,
+              backgroundColor: widget.backgroundColor,
+              color: widget._getColor(context),
+              curve: widget.curve,
+              dotDiameter: widget.dotDiameter,
+              numberOfDots: widget.numberOfDots,
+              spaceBetween: widget.spaceBetween,
+              textDirection: textDirection,
+            ),
           ),
         ),
       ),
     );
+  }
+
+  @override
+  void didUpdateWidget(DotsProgressIndicator oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.controller != widget.controller ||
+        widget.controller == null && oldWidget.duration != widget.duration) {
+      _initController();
+    }
+  }
+
+  void _initController() {
+    _controller = widget.controller ??
+        AnimationController(
+          duration: widget.duration,
+          vsync: this,
+        )
+      ..repeat();
   }
 }
