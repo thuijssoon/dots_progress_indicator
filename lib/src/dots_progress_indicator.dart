@@ -98,16 +98,18 @@ class _DotsProgressIndicatorState extends State<DotsProgressIndicator>
           minWidth: (widget.dotDiameter * widget.numberOfDots) +
               (widget.spaceBetween * (widget.numberOfDots - 1)),
         ),
-        child: CustomPaint(
-          painter: DotsProgressIndicatorPainter(
-            animation: _controller.view,
-            backgroundColor: widget.backgroundColor,
-            color: widget._getColor(context),
-            curve: widget.curve,
-            dotDiameter: widget.dotDiameter,
-            numberOfDots: widget.numberOfDots,
-            spaceBetween: widget.spaceBetween,
-            textDirection: textDirection,
+        child: RepaintBoundary(
+          child: CustomPaint(
+            painter: DotsProgressIndicatorPainter(
+              animation: _controller.view,
+              backgroundColor: widget.backgroundColor,
+              color: widget._getColor(context),
+              curve: widget.curve,
+              dotDiameter: widget.dotDiameter,
+              numberOfDots: widget.numberOfDots,
+              spaceBetween: widget.spaceBetween,
+              textDirection: textDirection,
+            ),
           ),
         ),
       ),
